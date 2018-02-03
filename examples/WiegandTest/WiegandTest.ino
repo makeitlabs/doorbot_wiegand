@@ -3,18 +3,27 @@
 WIEGAND wg;
 
 void setup() {
+    pinMode(LED_BUILTIN, OUTPUT);
 	Serial.begin(9600);  
 	wg.begin();
+    Serial.print("HI");
 }
 
 void loop() {
-	if(wg.available())
-	{
-		Serial.print("Wiegand HEX = ");
+  digitalWrite(LED_BUILTIN, HIGH); 
+  delay(200);
+
+	if (wg.available()) {
+   Serial.write(2); 
 		Serial.print(wg.getCode(),HEX);
-		Serial.print(", DECIMAL = ");
-		Serial.print(wg.getCode());
-		Serial.print(", Type W");
-		Serial.println(wg.getWiegandType());    
+      Serial.write(3); 
+
+	//	Serial.print(wg.getCode());
+//		Serial.print(", Type W");
+	//	Serial.println(wg.getWiegandType());  
+      delay(100);   
 	}
+  digitalWrite(LED_BUILTIN, LOW); 
+  delay(150); 
+  
 }
